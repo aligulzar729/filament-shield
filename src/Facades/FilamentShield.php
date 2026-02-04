@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static \BezhanSalleh\FilamentShield\FilamentShield buildPermissionKeyUsing(\Closure $callback)
  * @method static \BezhanSalleh\FilamentShield\FilamentShield createSuperAdminUsing(\Closure $callback)
- * @method static \Illuminate\Contracts\Auth\Authenticatable|null createSuperAdmin(string $userModel)
+ * @method static \Illuminate\Contracts\Auth\Authenticatable|null createSuperAdmin()
  * @method static array|null getResources()
  * @method static array|null getPages()
  * @method static array|null getWidgets()

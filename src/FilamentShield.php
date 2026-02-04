@@ -40,16 +40,11 @@ class FilamentShield
         return $this;
     }
 
-    public function createSuperAdmin(string $userModel): ?Authenticatable
+    public function createSuperAdmin(): ?Authenticatable
     {
         if ($this->createSuperAdminUsing instanceof Closure) {
             /** @var Authenticatable $result */
-            $result = $this->evaluate(
-                value: $this->createSuperAdminUsing,
-                namedInjections: [
-                    'userModel' => $userModel,
-                ]
-            );
+            $result = $this->evaluate($this->createSuperAdminUsing);
 
             return $result;
         }

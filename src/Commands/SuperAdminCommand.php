@@ -128,7 +128,7 @@ class SuperAdminCommand extends Command
 
     protected function createSuperAdmin(): Authenticatable
     {
-        return app('filament-shield')->createSuperAdmin(static::getUserModel())
+        return app('filament-shield')->createSuperAdmin()
             ?? $this->createSuperAdminInteractively();
     }
 

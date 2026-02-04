@@ -101,7 +101,7 @@ describe('creating super admin interactively', function () {
 
 describe('custom super admin creation via createSuperAdminUsing', function () {
     it('uses custom closure when registered', function () {
-        app('filament-shield')->createSuperAdminUsing(fn(string $userModel) => $userModel::create([
+        app('filament-shield')->createSuperAdminUsing(fn () => getUserModel()::create([
             'name' => 'Custom Admin',
             'email' => 'custom@example.com',
             'password' => Hash::make('secret'),
@@ -143,7 +143,22 @@ describe('createSuperAdminUsing API', function () {
     it('returns null from createSuperAdmin when no closure is set', function () {
         $shield = new FilamentShield;
 
-        expect($shield->createSuperAdmin(getUserModel()))->toBeNull();
+        expect($shield->createSuperAdmin())->toBeNull();
+    });
+
+    it('executes the registered closure and returns the result', function () {
+        $shield = new FilamentShield;
+
+        $shield->createSuperAdminUsing(fn () => getUserModel()::factory()->create([
+            'name' => 'API Admin',
+            'email' => 'api@example.com',
+            'password' => Hash::make('secret'),
+        ]));
+
+        $result = $shield->createSuperAdmin();
+
+        expect($result)->not->toBeNull()
+            ->and($result->email)->toBe('api@example.com');
     });
 });
 
